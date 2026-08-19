@@ -9,6 +9,8 @@ from PIL import Image
 from pathlib import Path
 import time
 import random
+import base64
+
 
 st.set_page_config(
     page_title="❤️ Will You Be My Girlfriend?",
@@ -290,7 +292,123 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-st.snow()
+
+
+# ---------------- Hello Kitty Falling Animation ----------------
+
+kitty_path = Path("images/kitty.png")
+
+with open(kitty_path, "rb") as f:
+    kitty_base64 = base64.b64encode(f.read()).decode()
+
+st.markdown(
+    f"""
+    <style>
+    .kitty {{
+        position: fixed;
+        top: -80px;
+        width: 55px;
+        height: auto;
+        z-index: 9999;
+        pointer-events: none;
+        animation: kitty-fall linear infinite;
+    }}
+
+    @keyframes kitty-fall {{
+        0% {{
+            transform: translateY(-100px) rotate(0deg);
+            opacity: 0;
+        }}
+
+        10% {{
+            opacity: 1;
+        }}
+
+        50% {{
+            transform: translateY(50vh) rotate(180deg);
+        }}
+
+        100% {{
+            transform: translateY(110vh) rotate(360deg);
+            opacity: 0;
+        }}
+    }}
+
+    .kitty1 {{
+        left: 5%;
+        animation-duration: 5s;
+        animation-delay: 0s;
+    }}
+
+    .kitty2 {{
+        left: 20%;
+        animation-duration: 7s;
+        animation-delay: 1s;
+    }}
+
+    .kitty3 {{
+        left: 40%;
+        animation-duration: 6s;
+        animation-delay: 2s;
+    }}
+
+    .kitty4 {{
+        left: 60%;
+        animation-duration: 8s;
+        animation-delay: 0.5s;
+    }}
+
+    .kitty5 {{
+        left: 80%;
+        animation-duration: 5.5s;
+        animation-delay: 3s;
+    }}
+
+    .kitty6 {{
+        left: 92%;
+        animation-duration: 7.5s;
+        animation-delay: 1.5s;
+    }}
+    </style>
+
+    <img class="kitty kitty1"
+         src="data:image/png;base64,{kitty_base64}">
+
+    <img class="kitty kitty2"
+         src="data:image/png;base64,{kitty_base64}">
+
+    <img class="kitty kitty3"
+         src="data:image/png;base64,{kitty_base64}">
+
+    <img class="kitty kitty4"
+         src="data:image/png;base64,{kitty_base64}">
+
+    <img class="kitty kitty5"
+         src="data:image/png;base64,{kitty_base64}">
+
+    <img class="kitty kitty6"
+         src="data:image/png;base64,{kitty_base64}">
+    """,
+    unsafe_allow_html=True
+)
+
+
+
+col1, col2, col3, col4, col5 = st.columns([1, 1, 1, 1, 1])
+
+with col2:
+    img1 = Image.open("images/kitty1.png")
+    st.image(img1, width=100)
+
+with col3:
+    img2 = Image.open("images/kitty1.png")
+    st.image(img2, width=100)
+
+with col4:
+    img3 = Image.open("images/kitty1.png")
+    st.image(img3, width=100)
+
+st.markdown("💕🐶🖤 🐶🤎 💕")
 st.markdown("❤️ 💖 💕 💗 💞 💓")
 
 st.write("")
